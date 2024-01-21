@@ -8,6 +8,7 @@ const products = require('./routes/products');
 require('dotenv').config();
 const uri = process.env.MONGO_URI
 mongoose.Promise = global.Promise;
+const port = process.env.PORT || 3002;
 
 mongoose.connect(uri)
         .then(() => console.log('connection successfully!'))
@@ -47,5 +48,9 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.listen(port,()=>{
+  console.log("server is runing on port "+port);
+})
 
 module.exports = app;
